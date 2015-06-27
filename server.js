@@ -39,24 +39,6 @@ if (cluster.isMaster) {
 	});
 
 
-	app.post('/priceCheck',function(req,res){
-		var data = {
-				'amazonUrl' : req.body.amazonUrl,
-				'snapdealUrl' : req.body.snapdealUrl,
-				'flipkartUrl' : req.body.flipkartUrl,
-				'paytmUrl' : req.body.paytmUrl
-		}
-		var shelljs = require('shelljs');
-		exec('phantomjs click.js '+data.amazonUrl+' '+data.snapdealUrl+' '+data.flipkartUrl+' '+data.paytmUrl,function(data){
-
-		});
-		console.log('print price in nodejs');
-		var fs = require('fs');
-
-		fs.readFile('output.txt','utf8',function(err,data){
-			res.send(data);
-		});
-	});
 
 	app.post('/amazonPrice',function(req,res){
 		var data = {
@@ -84,38 +66,6 @@ if (cluster.isMaster) {
 
 	});
 
-	app.post('/flipkartPrice',function(req,res){
-		var data = {
-				'itemName' : req.body.itemName
-		}
-		var shelljs = require('shelljs');
-		console.log(data);
-		var outputVar ;
-		var outputVar = shelljs.exec('phantomjs click.js FK "'+data.itemName+'"');
-		var responseToSend = parser.outputFromScriptParser(outputVar);
-		res.send(responseToSend);
-		console.log('============================================='+responseToSend);
-
-	});
-
-
-
-	app.post('/getBasicDetail',function(req,res){
-		var data = {
-				'amazonUrl' : req.body.amazonUrl,
-				'snapdealUrl' : req.body.snapdealUrl,
-				'flipkartUrl' : req.body.flipkartUrl,
-				'paytmUrl' : req.body.paytmUrl
-		}
-		var shelljs = require('shelljs');
-		shelljs.exec('phantomjs click.js '+data.amazonUrl+' '+data.snapdealUrl+' '+data.flipkartUrl+' '+data.paytmUrl);
-		console.log('print price in nodejs');
-		var fs = require('fs');
-
-		fs.readFile('output.txt','utf8',function(err,data){
-			res.send(data);
-		});
-	});
 
 	app.listen(3005,function(){
 		console.log("App Started on PORT 3005");
