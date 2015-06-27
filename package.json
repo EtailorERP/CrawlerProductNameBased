@@ -1,0 +1,15 @@
+{
+  "name": "fetchData",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node nodeServer.js"
+  },
+  "dependencies": {
+    "hashmap" : "*",
+    "body-parser" : "*",
+    "request" : "*",
+    "shelljs" : "*",
+    "system"  : "*"
+  }
+}
