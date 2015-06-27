@@ -38,13 +38,13 @@ function searchItemOnMP(mp,item){
 	break;
 	case 'SD':
 	{
-		var stime = new Date();
+//		var stime = new Date();
 		var page = require('webpage').create();
 		var cb = function(response){
 			console.log('","actual" : '+response+'}');
-			var eTime = new Date();
-			console.log(eTime);
-			console.log(eTime-stime);
+//			var eTime = new Date();
+//			console.log(eTime);
+//			console.log(eTime-stime);
 			phantom.exit(0);
 		}
 		snapdealService.startOnSnapdeal(page,item,cb);	
