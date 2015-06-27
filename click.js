@@ -11,11 +11,11 @@ urls[i] = arg;
 });
 
 
-//var MARKET_PLACE =urls[1];
-//var itemToSearch = urls[2];
-
-var MARKET_PLACE ='SD';
-var itemToSearch = 'SanDisk Cruzer Blade USB Flash Drive 16GB';
+var MARKET_PLACE =urls[1];
+var itemToSearch = urls[2];
+//
+//var MARKET_PLACE ='SD';
+//var itemToSearch = 'SanDisk Cruzer Blade USB Flash Drive 16GB';
 
 var marketPlacesToSearch = ['SD','AMAZON'];
 var amazonService = require('./services/amazon/amazon.js');
