@@ -53,6 +53,9 @@ var forGettingProductDescription = {
 		'tagsNameIndex' : 0
 }
 
+var forGettingSellerName = {
+		'mainBlockId' : 'vendorName'
+}
 
 function startOnSnapdeal(page,item,cb){
 	var count = 0;
@@ -95,11 +98,12 @@ function startOnSnapdeal(page,item,cb){
 		}
 		else if(count == 3){
 			page.render('./downloaded/snapdealItem.png');
-			var price,userRating,productName;
+			var price,userRating,productName,productDescription,seller;
 			price = pageOpener.snapdeal.forGettingPrice(page);
 			userRating = pageOpener.snapdeal.forGettingUserRating(page);
 			productName = pageOpener.snapdeal.forGettingProductName(page);
 			productDescription = pageOpener.snapdeal.forGettingProductDescription(page);
+			seller = pageOpener.snapdeal.forGettingSellerName(page);
 //			image = pageOpener.amazon.forGettingProductImage(page);
 			// need to do processing
 			var jsonResponse = {
@@ -107,6 +111,7 @@ function startOnSnapdeal(page,item,cb){
 					'price' : price,
 					'rating' : userRating,
 					'description' : productDescription,
+					'seller' : seller,
 					'lineGraph' : false
 			}
 //			page.clipRect = image;
@@ -136,3 +141,4 @@ exports.forGettingUserRating = forGettingUserRating;
 exports.forGettingProductImage = forGettingProductImage;
 exports.forGettingProductName = forGettingProductName;
 exports.forGettingProductDescription = forGettingProductDescription;
+exports.forGettingSellerName = forGettingSellerName;

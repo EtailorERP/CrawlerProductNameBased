@@ -13,8 +13,8 @@ urls[i] = arg;
 
 var MARKET_PLACE =urls[1];
 var itemToSearch = urls[2];
-//
-//var MARKET_PLACE ='AMAZON';
+
+//var MARKET_PLACE ='SD';
 //var itemToSearch = 'SanDisk Cruzer Blade USB Flash Drive 16GB';
 
 var marketPlacesToSearch = ['SD','AMAZON'];

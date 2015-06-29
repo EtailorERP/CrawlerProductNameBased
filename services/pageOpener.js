@@ -96,6 +96,17 @@ var amazon = {
 			},productDescRules)
 
 			return desc;
+		},
+		'forGettingSellerName' : function(page){
+			var getSellerRules = amz.forGettingSellerName;
+			
+			var seller = page.evaluate(function(getSellerRules){
+				var main = document.getElementById(getSellerRules.mainBlockId);
+				var seller = main.getElementsByTagName(getSellerRules.tagsName)[getSellerRules.tagsNameIndex].innerHTML;
+				return seller;
+			},getSellerRules);
+			
+			return seller;
 		}
 }
 
@@ -220,6 +231,16 @@ var snapdeal = {
 				return description;
 			},productDescriptionRules);
 			return productDescription;
+		},
+		'forGettingSellerName' : function(page){
+			var getSellerRules = sd.forGettingSellerName;
+			
+			var seller = page.evaluate(function(getSellerRules){
+				var seller = document.getElementById(getSellerRules.mainBlockId).innerHTML;
+				return seller;
+			},getSellerRules);
+			
+			return seller;
 		}
 }
 

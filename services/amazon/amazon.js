@@ -46,6 +46,12 @@ var forGettingProductDescription = {
 	'contentIndex' : 0
 }
 
+var forGettingSellerName = {
+		'mainBlockId' : 'merchant-info',
+		'tagsName' : 'a',
+		'tagsNameIndex' : 0
+}
+
 function startOnAmazon(page,item,cb){
 	var count = 0;
 	console.log('amazon Started');
@@ -64,17 +70,19 @@ function startOnAmazon(page,item,cb){
 	  }
 	  else if(count == 4){		  
 		page.render('./downloaded/amzonItem.png');
-		var price,userRating,name,description;
+		var price,userRating,name,description,seller;
 		price = pageOpener.amazon.forGettingPrice(page);
 		userRating = pageOpener.amazon.forGettingUserRatings(page);
 		name = pageOpener.amazon.forGettingProductName(page);
 		description = pageOpener.amazon.forGettingProductDescription(page);
+		var seller = pageOpener.amazon.forGettingSellerName(page);
 //		 need to do processing
 		var jsonResponse = {
 				'name' : name ,
 				'price' : price,
 				'rating' : userRating,
 				'description' : description,
+				'seller' : seller,
 				'lineGraph' : true
 		}
 		jsonResponse = jsonParser.jsonToString(jsonResponse);
@@ -103,3 +111,4 @@ exports.forGettingUserRating = forGettingUserRating;
 exports.forGettingProductImage = forGettingProductImage;
 exports.forGettingProductDescription = forGettingProductDescription;
 exports.forGettingProductName = forGettingProductName;
+exports.forGettingSellerName = forGettingSellerName;
