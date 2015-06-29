@@ -14,7 +14,7 @@ urls[i] = arg;
 var MARKET_PLACE =urls[1];
 var itemToSearch = urls[2];
 //
-//var MARKET_PLACE ='SD';
+//var MARKET_PLACE ='AMAZON';
 //var itemToSearch = 'SanDisk Cruzer Blade USB Flash Drive 16GB';
 
 var marketPlacesToSearch = ['SD','AMAZON'];
@@ -28,8 +28,11 @@ function searchItemOnMP(mp,item){
 	switch(mp){
 	case 'AMAZON' :
 	{
+//		var stime = new Date();
 		var page = require('webpage').create();
 		var cb = function(response){
+//			var eTime = new Date();
+//			console.log(eTime-stime);
 			console.log('","actual" : '+response+'}');			
 			phantom.exit(0);
 		}

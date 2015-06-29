@@ -77,6 +77,25 @@ var amazon = {
 			},imageRules);
 			consosole.log(image);
 
+		},
+		'forGettingProductName' : function(page){
+			var productNameRules = amz.forGettingProductName;
+			var title = page.evaluate(function(productNameRules){
+				var title = document.getElementById(productNameRules.titleId).innerHTML;
+				return title;
+			},productNameRules)
+			
+			return title;
+		},
+		'forGettingProductDescription' : function(page){
+			var productDescRules = amz.forGettingProductDescription;
+			var desc = page.evaluate(function(productDescRules){
+				var main = document.getElementById(productDescRules.mainDivId);
+				var desc = main.getElementsByClassName(productDescRules.contentClass)[productDescRules.contentIndex].innerHTML;
+				return desc;
+			},productDescRules)
+
+			return desc;
 		}
 }
 
@@ -86,7 +105,7 @@ var snapdeal = {
 			console.log('hrer in searching');
 			// page.includeJs('http://code.jquery.com/jquery-2.1.4.min.js', function() {
 			// don't use console inside here
-			page.evaluate(function(forSearching,item) {
+			page.evaluate(function(forSearching) {
 				document.getElementById(forSearching.inputBoxID).value = item;
 				document.getElementById(forSearching.formId).submit();
 			},forSearchingRules,item);
@@ -160,23 +179,23 @@ var snapdeal = {
 			return userRating;
 		},
 //		'forGettingProductImage' : function(page){
-//			var imageRules = sd.forGettingProductImage;
-//			console.log(imageRules);
-//			var image =   page.evaluate(function(imageRules) {
-//				var block = document.getElementById('product-slider');
-//				var img = block.getElementsByTagName('img')[0];
-//				var jsonObject = {
-//						top : img.offsetTop,
-//						left : img.offsetLeft,
-//						width : img.width,
-//						height : img.height
-//				}
-//				return jsonObject;
-//			},imageRules);
-//			return image;
+//		var imageRules = sd.forGettingProductImage;
+//		console.log(imageRules);
+//		var image =   page.evaluate(function(imageRules) {
+//		var block = document.getElementById('product-slider');
+//		var img = block.getElementsByTagName('img')[0];
+//		var jsonObject = {
+//		top : img.offsetTop,
+//		left : img.offsetLeft,
+//		width : img.width,
+//		height : img.height
+//		}
+//		return jsonObject;
+//		},imageRules);
+//		return image;
 //		},
 //		'getBasicDetails' : function(page){
-//
+
 //		},
 		'forGettingProductName' : function(page){
 			var productNameRules = sd.forGettingProductName;
@@ -185,7 +204,7 @@ var snapdeal = {
 				var block = document.getElementsByClassName(productNameRules.mainBlockClass);
 				block = block[productNameRules.mainBlockIndex].getElementsByTagName(productNameRules.tagsName);
 				var name = block[productNameRules.tagsNameIndex].innerHTML;
-				
+
 				return name;
 			},productNameRules);
 			console.log(productName);

@@ -36,6 +36,16 @@ var forGettingProductImage = {
 	'tagsName' : 'img'
 }
 
+var forGettingProductName = {
+	'titleId' : 'productTitle'
+}
+
+var forGettingProductDescription = {
+	'mainDivId' : 'productDescription',
+	'contentClass' : 'productDescriptionWrapper',
+	'contentIndex' : 0
+}
+
 function startOnAmazon(page,item,cb){
 	var count = 0;
 	console.log('amazon Started');
@@ -52,25 +62,36 @@ function startOnAmazon(page,item,cb){
 		page.render('./downloaded/amazonItemList.png');
 		pageOpener.amazon.forGettingFromList(page);
 	  }
-	  else if(count == 4){
+	  else if(count == 4){		  
 		page.render('./downloaded/amzonItem.png');
-		var price,userRating;
-//		price = pageOpener.amazon.forGettingPrice(page);
-//		userRating = pageOpener.amazon.forGettingUserRatings(page);
-		image = pageOpener.amazon.forGettingProductImage(page);
-		// need to do processing
-//		var jsonResponse = {
-//				'price' : price,
-//				'rating' : userRating,
-//				'lineGraph' : true
-//		}
-		console.log(image);
-		page.clipRect = image;
-		page.render('productImage.png');
-//		jsonResponse = jsonParser.jsonToString(jsonResponse);
-//		cb(jsonResponse);
+		var price,userRating,name,description;
+		price = pageOpener.amazon.forGettingPrice(page);
+		userRating = pageOpener.amazon.forGettingUserRatings(page);
+		name = pageOpener.amazon.forGettingProductName(page);
+		description = pageOpener.amazon.forGettingProductDescription(page);
+//		 need to do processing
+		var jsonResponse = {
+				'name' : name ,
+				'price' : price,
+				'rating' : userRating,
+				'description' : description,
+				'lineGraph' : true
+		}
+		jsonResponse = jsonParser.jsonToString(jsonResponse);
+		cb(jsonResponse);
 	  }
+
 	}
+	
+	page.onResourceRequested = function(requestData, networkRequest) {
+//		console.log(requestData.headers);
+		var list = requestData.url.split(".");
+		var len = list.length;
+		var str = list[len-1];
+		if(str.length == 3 && (str=='jpg' || str=='gif' || str=='png')){
+			networkRequest.abort();
+		}
+	};
 
 }
 
@@ -80,3 +101,5 @@ exports.forGettingItemFromList = forGettingItemFromList;
 exports.forGettingPrice = forGettingPrice;
 exports.forGettingUserRating = forGettingUserRating;
 exports.forGettingProductImage = forGettingProductImage;
+exports.forGettingProductDescription = forGettingProductDescription;
+exports.forGettingProductName = forGettingProductName;
