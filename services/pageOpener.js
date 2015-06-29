@@ -105,7 +105,7 @@ var snapdeal = {
 			console.log('hrer in searching');
 			// page.includeJs('http://code.jquery.com/jquery-2.1.4.min.js', function() {
 			// don't use console inside here
-			page.evaluate(function(forSearching) {
+			page.evaluate(function(forSearching,item) {
 				document.getElementById(forSearching.inputBoxID).value = item;
 				document.getElementById(forSearching.formId).submit();
 			},forSearchingRules,item);
