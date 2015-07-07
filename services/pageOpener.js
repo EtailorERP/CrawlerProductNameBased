@@ -156,8 +156,8 @@ var snapdeal = {
 			var getPriceRules = sd.forGettingPrice;
 			console.log(getPriceRules);
 			var price =   page.evaluate(function(priceRules) {
-				if(document.getElementById(priceRules.priceTagId1) != null){
-					return document.getElementById(priceRules.priceTagId1).innerHTML;
+				if(document.getElementsByClassName(priceRules.priceTagClass) != null){
+					return document.getElementsByClassName(priceRules.priceTagClass)[priceRules.priceIndex].innerHTML;
 				}
 				else return 'not able to fetch Price';
 			},getPriceRules);
@@ -213,8 +213,8 @@ var snapdeal = {
 			console.log(productNameRules);
 			var productName =   page.evaluate(function(productNameRules) {
 				var block = document.getElementsByClassName(productNameRules.mainBlockClass);
-				block = block[productNameRules.mainBlockIndex].getElementsByTagName(productNameRules.tagsName);
-				var name = block[productNameRules.tagsNameIndex].innerHTML;
+				block = block[productNameRules.mainBlockIndex].getElementsByClassName(productNameRules.productNameClass);
+				var name = block[productNameRules.productNameIndex].innerHTML;
 
 				return name;
 			},productNameRules);
@@ -226,9 +226,10 @@ var snapdeal = {
 			console.log(productDescriptionRules);
 			var productDescription = page.evaluate(function(productDesriptionRules){
 				var block = document.getElementsByClassName(productDesriptionRules.mainBlockClass);
-				block = block[productDesriptionRules.mainBlockClassIndex].getElementsByClassName(productDesriptionRules.detailDivClass);
-				var description = block[productDesriptionRules.detailDivIndex].getElementsByTagName(productDesriptionRules.tagsName)[productDesriptionRules.tagsNameIndex].innerHTML;
-				return description;
+				block = block[productDesriptionRules.mainBlockIndex].innerHTML;
+				//.getElementsByClassName(productDesriptionRules.detailDivClass);
+				//var description = block[productDesriptionRules.detailDivIndex].getElementsByTagName(productDesriptionRules.tagsName)[productDesriptionRules.tagsNameIndex].innerHTML;
+				return block;
 			},productDescriptionRules);
 			return productDescription;
 		},
@@ -236,7 +237,7 @@ var snapdeal = {
 			var getSellerRules = sd.forGettingSellerName;
 			
 			var seller = page.evaluate(function(getSellerRules){
-				var seller = document.getElementById(getSellerRules.mainBlockId).innerHTML;
+				var seller = document.getElementsByClassName(getSellerRules.mainBlockClass)[getSellerRules.mainBlockIndex].innerHTML;
 				return seller;
 			},getSellerRules);
 			
